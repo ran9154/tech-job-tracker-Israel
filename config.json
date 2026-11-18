@@ -21,6 +21,9 @@
     "AI Automation"
   ],
   "excluded_roles": [
+    "Software Engineer",
+    "Software Developer",
+    "Product Designer",
     "Backend",
     "Frontend",
     "Fullstack",

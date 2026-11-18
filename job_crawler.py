@@ -218,6 +218,20 @@ def build_reject_title_regex(cfg):
         patterns.extend([r"qa\b", r"manual tester", r"qc\b", r"quality assurance"])
     if "devops" in excluded_lower:
         patterns.extend([r"devops", r"sre\b", r"infrastructure engineer", r"sysadmin", r"system administrator"])
+    if "backend" in excluded_lower:
+        patterns.extend([r"backend", r"back-end"])
+    if "frontend" in excluded_lower:
+        patterns.extend([r"frontend", r"front-end"])
+    if "fullstack" in excluded_lower:
+        patterns.extend([r"fullstack", r"full-stack", r"full stack"])
+    if "mobile" in excluded_lower:
+        patterns.extend([r"mobile", r"ios\b", r"android\b"])
+    if "embedded" in excluded_lower:
+        patterns.extend([r"embedded", r"firmware"])
+    if "software engineer" in excluded_lower or "software developer" in excluded_lower:
+        patterns.extend([r"software engineer", r"software developer", r"forward deployed"])
+    if "product designer" in excluded_lower:
+        patterns.extend([r"product designer", r"ux\b", r"ui/ux"])
 
     if max_yoe <= 2:
         patterns.extend([
@@ -229,15 +243,20 @@ def build_reject_title_regex(cfg):
 
 
 def build_candidate_title_regex(cfg):
+    target_lower = " ".join(str(x).lower() for x in cfg.get("target_roles", []))
     base_keywords = [
-        r"software", r"developer", r"engineer", r"fullstack", r"full-stack",
-        r"backend", r"back-end", r"frontend", r"front-end",
         r"ai\b", r"ml\b", r"machine learning", r"deep learning",
         r"data scientist", r"data science", r"data analyst", r"algorithms?",
-        r"computer vision", r"nlp\b", r"mlops", r"embedded", r"firmware",
-        r"python", r"java\b", r"c\+\+", r"golang", r"react", r"node",
-        r"automation", r"tools developer", r"product engineer"
+        r"computer vision", r"nlp\b", r"mlops", r"python", r"automation"
     ]
+
+    if any(k in target_lower for k in ("software", "backend", "frontend", "fullstack", "developer", "mobile", "embedded")):
+        base_keywords.extend([
+            r"software", r"developer", r"engineer", r"fullstack", r"full-stack",
+            r"backend", r"back-end", r"frontend", r"front-end",
+            r"embedded", r"firmware", r"java\b", r"c\+\+", r"golang", r"react", r"node",
+            r"tools developer", r"product engineer"
+        ])
 
     if cfg.get("include_student_and_graduate", True):
         base_keywords.extend([r"intern\b", r"internship", r"student", r"graduate", r"grad\b"])
@@ -306,7 +325,7 @@ def call_gemini_with_retries(payload, timeout=45):
         "https://generativelanguage.googleapis.com/v1beta/"
         f"models/{MODEL_NAME}:generateContent?key={GEMINI_API_KEY}"
     )
-    max_attempts = 5
+    max_attempts = 3
 
     for attempt in range(1, max_attempts + 1):
         try:
@@ -322,7 +341,7 @@ def call_gemini_with_retries(payload, timeout=45):
             if attempt == max_attempts:
                 break
 
-            wait_time = min(4 * (2 ** (attempt - 1)), 45)
+            wait_time = min(3 * (2 ** (attempt - 1)), 12)
             print(f"        Retrying in {wait_time}s...")
             time.sleep(wait_time)
 
@@ -330,7 +349,7 @@ def call_gemini_with_retries(payload, timeout=45):
             print(f"    [!] Gemini network error ({attempt}/{max_attempts}): {exc}")
             if attempt == max_attempts:
                 raise RuntimeError("Gemini API unreachable after retries") from exc
-            wait_time = min(4 * (2 ** (attempt - 1)), 45)
+            wait_time = min(3 * (2 ** (attempt - 1)), 12)
             print(f"        Retrying in {wait_time}s...")
             time.sleep(wait_time)
 
@@ -1001,7 +1020,7 @@ def main():
         # --- STAGE 3: High-Precision Small-Batch AI Verification ---
         if ai_ready_candidates:
             print(f"\n=== STAGE 3: Precision Batch AI Verification ({len(ai_ready_candidates)} jobs) ===")
-            batch_size = 4
+            batch_size = 8
             batches = [ai_ready_candidates[i:i + batch_size] for i in range(0, len(ai_ready_candidates), batch_size)]
             print(f"[*] Grouped into {len(batches)} batches of up to {batch_size} jobs each.\n")
 

@@ -1,1 +1,52 @@
-[]
+[
+  {
+    "company": "group 19",
+    "title": "Data Analyst >",
+    "referral_contact": "הגשה ישירה באתר (ללא רפרל)",
+    "referral_type": "הגשה ישירה",
+    "location": "Ofakim (Israel)",
+    "url": "https://www.group19.org.il/dataanalyst-1",
+    "experience": "Entry level / professional course certificate or academic degree, no multi-year experience requirement specified.",
+    "discovered_at": "2026-11-18T16:13:21.691623"
+  },
+  {
+    "company": "monday.com",
+    "title": "AI Engineer (render.ai) Tel-Aviv, IL",
+    "referral_contact": "הגשה ישירה באתר (ללא רפרל)",
+    "referral_type": "הגשה ישירה",
+    "location": "Tel-Aviv, IL",
+    "url": "https://monday.com/careers/077675a8-bfb6-47f4-a466-347561c26258",
+    "experience": "Junior-friendly startup environment for AI engineering, no minimum 3+ years experience required.",
+    "discovered_at": "2026-11-18T16:27:25.607075"
+  },
+  {
+    "company": "Schemathics",
+    "title": "Performance Analyst Experienced performance/ business analyst with 2 years of experience Tel Aviv Full-time â",
+    "referral_contact": "הגשה ישירה באתר (ללא רפרל)",
+    "referral_type": "הגשה ישירה",
+    "location": "Tel Aviv",
+    "url": "https://schemathics.com/careers/performance-analyst",
+    "experience": "2+ years of experience required (fits 0-2 YOE criteria as 2 is the maximum threshold / entry boundary allowed)",
+    "discovered_at": "2026-11-18T16:56:33.365781"
+  },
+  {
+    "company": "opisoft",
+    "title": "BI and ETL Developer",
+    "referral_contact": "הגשה ישירה באתר (ללא רפרל)",
+    "referral_type": "הגשה ישירה",
+    "location": "Petah Tikva / Israel",
+    "url": "https://opisoft.com/career/bi-and-etl-developer/",
+    "experience": "2 years of experience required",
+    "discovered_at": "2026-11-18T17:03:13.716338"
+  },
+  {
+    "company": "opisoft",
+    "title": "BI Developer – Opisoft",
+    "referral_contact": "הגשה ישירה באתר (ללא רפרל)",
+    "referral_type": "הגשה ישירה",
+    "location": "Center District / Israel",
+    "url": "https://opisoft.com/career/bi-developer-opisoft/",
+    "experience": "Initial experience or practical background (entry-level)",
+    "discovered_at": "2026-11-18T17:03:13.716364"
+  }
+]
